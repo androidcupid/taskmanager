@@ -1,0 +1,168 @@
+@import url(/css/animate.css);
+nav.navbar-nav{
+    color: white;
+}
+
+h1.title{
+    font: 'Lato';
+    font-size: 80px;
+    font-stretch: ultra-expanded;
+    font-weight: bolder;
+    color: #0984e3;
+}
+h1,h2,h3,h4,h5{
+    color: #0984e3;
+}
+div.navbar.navbar-primary{
+    background-color: #0984e3;
+}
+body{
+    background-color: #E7E7E7;
+}
+ul.nav.navbar-nav.pull-right li{
+color: white;
+}
+ul.nav.navbar-nav.pull-right li:hover{
+    fill:none;
+}
+a.active{
+    fill: none;
+}
+
+main{
+    padding:30px;
+}
+div.container{
+    margin: auto;
+}
+.well.post-card{
+    background-color: white;
+    padding: 20px;
+    margin:10px;
+}
+div.col{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post-title{
+    font-weight: bolder;
+}
+.badge{
+    
+    background-color: #0984e3;
+    color: white;
+    font-weight: bold;
+    margin-left: 3px;
+    margin-right: 3px;
+   
+}
+i.fa.fa-user{
+    padding-left:10px;
+    padding-right: 10px;
+}
+.btn-outline-danger{
+    color: red;
+    fill: none;
+    border: 2px solid red;
+}
+.btn-outline-primary{
+    fill: none;
+    border: 2px solid ;
+    color:#0984e3;
+}
+.btn-outline-success{
+    fill: none;
+    border: 2px solid green;
+    color: green;
+}
+div.well.categories{
+    padding:15px;
+    background-color: white;
+    width: 0;
+}
+div.new-blog,.post{
+    padding:45px;
+    background-color: white;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+a:hover{
+    text-decoration: none;
+}
+
+img.post-img{
+    margin: 5px;
+    height: 400px;
+    width: inherit;
+}
+i.details{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+div.header{
+    
+    padding-top: 20px;
+    background-color: ;
+    padding-bottom: 20px;
+}
+footer{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #0984e3;
+    color: ;
+}
+div.post-container{
+    padding: 30px;
+    margin: auto;
+}
+p.lead.content{
+    font: 'Roboto';
+    padding-top: 30px;
+    color: #636e72; 
+}
+body.main{
+    background:url("") center no-repeat;
+    background-size: cover;
+}
+div.jumbotron{
+    opacity:0.7;
+}
+.signin{
+    margin: auto;
+    background:rgba(255,255,255,0.7);
+    padding:2em;
+
+}
+ul.list-group{
+   background:rgba(255,255,255,0.7); 
+}
+select.btn.btn-primary{
+    color: white;
+    width: 100%;
+}
+div.col-md-10.form,div.col-md-12.form,div.col-md-10.p-records,
+div.col-md-12.p-records,div.col-md-10.users{
+    background: rgba(255,255,255,0.7);
+    padding: 2em;
+}
+@media screen and(min-device-width:768px)and(max-device-width:1024px){
+ul.nav.navbar-nav.pull-right>li>a{
+color: white;
+}
+ul.nav.navbar-nav.pull-right>li:hover{
+
+
+}
+div.main-profile>div.container{
+margin-left:10px;
+margin-right:10px;
+}
+
+transition: all 0.5436s ease-in-out;
+-webkit-transition:All 0.5s linear);
+transform: scale(1.5);
+}
