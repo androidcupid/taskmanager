@@ -9,7 +9,7 @@ include('/includes/connection.php');
                     <input type="text" class="form-control" name="username" required/>
                     <input type="text" class="form-control" name="password" required/>
 
-                    <button type="submit" class="btn btn-sm">Log In</button>
+                    <button type="submit" class="btn btn-sm" name="login">Log In</button>
                 </form>
             </div>
         </div>
