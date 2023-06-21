@@ -15,9 +15,9 @@ if(isset($_POST['login'])){
                 if($password==$rows['password']){
                     session_start();
 				$_SESSION['user'] = $rows['username'];
-                    header('location: dashboard.php');
+                    header('location: dashboard.php?view=active');
                 }else{
-                    echo '<div class="alert alert-danger">
+                    echo '<div class="alert alert-danger text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
                             <p>Invalid Password! Try Again!</p>
                         </div>';
                 }
@@ -35,7 +35,7 @@ if (isset($_POST['newtask'])) {
     $rs_newtask = mysqli_query($connection,$newtask);
 
     if ($rs_newtask) {
-        echo '<div class="alert alert-success">
+        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
                 <p class="text-center">Task Successfully Created!</p><br/>
                 <a href="dashboard.php?view=active">View task</a>
             </div>';
@@ -57,7 +57,7 @@ if (isset($_GET['tid'])) {
     $rs_uptask = mysqli_query($connection,$uptask);
     
     if ($rs_uptask) {
-        echo '<div class="alert alert-success">
+        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
                 <p class="text-center">Task Successfully Updated!</p><br/>
                 <a href="dashboard.php?view=active">View task</a>
             </div>';
@@ -70,15 +70,47 @@ if (isset($_GET['tid'])) {
     $rs_uptask = mysqli_query($connection,$uptask);
     
     if ($rs_uptask) {
-        echo '<div class="alert alert-success">
-                <p class="text-center">Task Successfully Updated!</p><br/>
-                <a href="dashboard.php?view=active">View task</a>
+        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+                <p class="">Task Successfully Updated!</p><br/>
+                <a href="dashboard.php?view=complete">View task</a>
             </div>';
     }else{
         echo "ERROR! success";
     }
 }
 
+}
+
+//delete post
+if (isset($_GET['action'])) {
+if($_GET['action']=='delete'){
+    $tid=$_GET['taskid'];
+    $del= "DELETE FROM task WHERE task_id='$tid'";
+
+    $dr = mysqli_query($connection, $del);
+
+    if ($dr) {
+        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        <strong>Task Deleted! </strong><br/>
+        <a href="dashboard.php?">Back</a>
+        </div>';
+    }else{
+        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        <strong>Invalid Credentials! Please Try Again!</strong><br/>
+        <a href="dashboard.php?">Back</a>
+        </div>';
+    }
+}
+}
+
+//logout
+if (isset($_GET['action'])) {
+    if ($_GET['action']=='logout') {
+    session_start();    
+    unset($_SESSION['user']);
+    session_destroy();
+    header('location: index.php');
+    }
 }
 
 
