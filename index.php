@@ -7,7 +7,7 @@ include('includes/connection.php');
             
             <div class="col-md-4 signin">
                 <h5 class="text-center">Sign In</h5>
-                <form class="form-group" action="controller.php">
+                <form class="form-group" method="post" action="controller.php">
                     <input type="text" class="form-control" name="username" placeholder="Username" required/>
                     <input type="password" class="form-control" name="password" placeholder="Password" required/>
 

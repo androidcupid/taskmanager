@@ -24,16 +24,23 @@ if ($rs) {
 					
 							echo '
 							<ul class="list-group">
-			<li class="list-group-item">
-				<a href="?view=active" id="showactive">Active Tasks</a>
-			</li>
-			<li class="list-group-item">
-				<a href="?view=complete" id="showcomplete">Completed Tasks</a>
-			</li>
-			<li class="list-group-item">
-				<a href="?action=logout" id="">Logout</a>
-			</li>
-		</ul>
+								<li class="list-group-item">
+									<a href="newtask.php">New Task</a>
+								</li>
+								<li class="list-group-item">
+									<a href="?view=all">All Tasks</a>
+								</li>
+								<li class="list-group-item">
+									<a href="?view=active" id="showactive">Active Tasks</a>
+								</li>
+								<li class="list-group-item">
+									<a href="?view=complete" id="showcomplete">Completed Tasks</a>
+								</li>
+								<li class="list-group-item">
+									<a href="?action=logout" id="">Logout</a>
+								</li>
+
+							</ul>
 							
 						</form>
 					  </div>
@@ -58,8 +65,12 @@ while ($rows=mysqli_fetch_assoc($rs_cat)) {
 		
 		echo '<span class="badge bg-warning pull-right">'.$rows['status'].'</span>
             <h3 class="text-center">'.$rows['task_title'].'</h3>
-            <p class="lead">'.$rows['task_content'].'</p>';
+            <p class="lead">'.$rows['task_content'].'</p>
+            <a class="btn btn-primary" href="edit-task.php?taskid='.$rows['task_id'].'">Edit</a>
+            <a class="btn btn-danger" href="controller.php?taskid='.$rows['task_id'].'">Delete</a>
+            ';
 
+            
 		echo '</div>';
 	
 }
@@ -68,9 +79,11 @@ if($_GET['view']=="all"){
 		while ($rows=mysqli_fetch_assoc($rs)) {
 			echo '<div class="well post-card">';
 
-			echo '<span class="badge bg-warning pull-right">'.$rows['status'].'</span>
+			echo '<span class="badge bg-success pull-right">'.$rows['status'].'</span>
             <h3 class="text-center">'.$rows['task_title'].'</h3>
-            <p class="lead">'.$rows['task_content'].'</p>';
+            <p class="lead">'.$rows['task_content'].'</p>
+            
+             ';
 
 			echo '</div>';
 					
@@ -87,7 +100,11 @@ $rs_comp = mysqli_query($connection,$view_comp);
 		while ($rows=mysqli_fetch_assoc($rs_comp)) {
 			echo '<div class="well post-card">';
 					
-			
+			echo '<span class="badge bg-warning pull-right">'.$rows['status'].'</span>
+            <h3 class="text-center">'.$rows['task_title'].'</h3>
+            <p class="lead">'.$rows['task_content'].'</p>
+            <a class="btn btn-danger" href="controller.php?taskid='.$rows['task_id'].'">Delete</a>
+            ';
 
 			echo '</div>';
 					
