@@ -1,5 +1,17 @@
-<?php
-include('includes/header.php'); 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taskmanager</title>
+    <link rel="stylesheet" type="text/css" href="/Taskmanager/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Taskmanager/css/font-awesome.css"/>
+    <link href = "/Taskmanager/css/animate.css" rel = "stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/Taskmanager/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+        
+</head>
+<body>
+    <?php session_start(); 
+//include('includes/header.php'); 
 include('includes/connection.php');
 
 if(isset($_POST['login'])){
@@ -26,7 +38,9 @@ if(isset($_POST['login'])){
     }
 }
 
-if (isset($_POST['newtask'])) {
+//if (isset($_POST['newtask'])) {
+if (isset($_GET['action'])) {
+if ($_GET['action']=='newtask') {
     //session_start();
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -35,13 +49,14 @@ if (isset($_POST['newtask'])) {
     $rs_newtask = mysqli_query($connection,$newtask);
 
     if ($rs_newtask) {
-        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
                 <p class="text-center">Task Successfully Created!</p><br/>
                 <a href="dashboard.php?view=active">View task</a>
             </div>';
     }else{
         echo "ERROR!";
     }
+}
 }
 
 if (isset($_GET['tid'])) {
@@ -57,12 +72,10 @@ if (isset($_GET['tid'])) {
     $rs_uptask = mysqli_query($connection,$uptask);
     
     if ($rs_uptask) {
-        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
                 <p class="text-center">Task Successfully Updated!</p><br/>
                 <a href="dashboard.php?view=active">View task</a>
             </div>';
-    }else{
-        echo "ERROR! active";
     }
 
 }else{
@@ -70,12 +83,10 @@ if (isset($_GET['tid'])) {
     $rs_uptask = mysqli_query($connection,$uptask);
     
     if ($rs_uptask) {
-        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
                 <p class="">Task Successfully Updated!</p><br/>
                 <a href="dashboard.php?view=complete">View task</a>
             </div>';
-    }else{
-        echo "ERROR! success";
     }
 }
 
@@ -90,12 +101,12 @@ if($_GET['action']=='delete'){
     $dr = mysqli_query($connection, $del);
 
     if ($dr) {
-        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
         <strong>Task Deleted! </strong><br/>
         <a href="dashboard.php?">Back</a>
         </div>';
     }else{
-        echo '<div class="alert alert-success text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+        echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
         <strong>Invalid Credentials! Please Try Again!</strong><br/>
         <a href="dashboard.php?">Back</a>
         </div>';

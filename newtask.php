@@ -6,16 +6,18 @@ if(!isset($_SESSION['user'])){
 }
 ?>
 <div class="container">
+	<div id="msg"></div>
+	<a class ="badge" href="dashboard.php?view=active"><<< Back </a>
 	<div class="new-task">
 		<h1 class="display-2 text-center">New Task</h1>
 
-		<form method="POST" action="controller.php">
+		<form method="POST" action="controller.php" id="task_data">
 							
-			<input type="text" class="form-control" name="title" placeholder="Title" required/>
+			<input type="text" class="form-control" name="title" id="title"placeholder="Title" required/>
 							
-			<textarea type="textbox" class="form-control" name="content" style="height:200px" placeholder="Description...." required> </textarea>							
+			<textarea type="textbox" class="form-control" name="content" id="content" style="height:200px" placeholder="Description...." required> </textarea>							
 
-			<button class="btn btn-success" name="newtask">POST</button>
+			<button type="submit" class="btn btn-success" name="newtask">POST</button>
 						
 		</form>
 	</div>
