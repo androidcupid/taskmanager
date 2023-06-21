@@ -1,4 +1,5 @@
 <?php
+include('includes/header.php'); 
 include('includes/connection.php');
 
 if(isset($_POST['login'])){
@@ -22,6 +23,24 @@ if(isset($_POST['login'])){
                 }
             }
         }
+    }
+}
+
+if (isset($_POST['newtask'])) {
+    session_start();
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $user = $_SESSION['user'];
+    $newtask = "INSERT INTO `task`(`task_title`, `task_content`, `status`, `date_created`, `createdby`) VALUES ('$title','$content','active',(select(current_timestamp())),'$user')";
+    $rs_newtask = mysqli_query($connection,$newtask);
+
+    if ($rs_newtask) {
+        echo '<div class="alert alert-success>
+                <p class="text-center">Task Successfully Created!</p><br/>
+                <a href="dashboard.php?view=active">View task</a>
+            </div>"';
+    }else{
+        echo "ERROR!";
     }
 }
 ?>
