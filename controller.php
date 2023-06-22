@@ -29,7 +29,7 @@ if(isset($_POST['login'])){
 				$_SESSION['user'] = $rows['username'];
                     header('location: dashboard.php?view=active');
                 }else{
-                    echo '<div class="alert alert-danger text-center"><button type="button" class="btn-close" aria-label="Close" data-dismiss="alert">X</button>
+                    echo '<div class="alert alert-danger text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
                             <p>Invalid Password! Try Again!</p>
                         </div>';
                 }
@@ -59,6 +59,9 @@ if ($_GET['action']=='newtask') {
 }
 }
 
+//edit-task.php
+if (isset($_GET['action'])) {
+if($_GET['action']=='edit'){
 if (isset($_GET['tid'])) {
     //session_start();
     $status = $_POST['status'];
@@ -91,6 +94,8 @@ if (isset($_GET['tid'])) {
 }
 
 }
+}
+}
 
 //delete post
 if (isset($_GET['action'])) {
@@ -103,7 +108,7 @@ if($_GET['action']=='delete'){
     if ($dr) {
         echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
         <strong>Task Deleted! </strong><br/>
-        <a href="dashboard.php?">Back</a>
+        <a href="dashboard.php?">Refresh Page</a>
         </div>';
     }else{
         echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>

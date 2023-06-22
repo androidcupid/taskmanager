@@ -12,7 +12,7 @@ $rs = mysqli_query($connection,$posts);
 if ($rs) {
 	//echo '<main>';
 	echo '<div class="container">
-
+			<div id="msg"></div>
 			<div class="row">
 				<div class="col-md-3">
 
@@ -72,6 +72,7 @@ $active = $_GET['view'];
 $show_task = "SELECT * FROM task WHERE status='$active'";
 $rs_cat = mysqli_query($connection,$show_task);
 
+if(mysqli_num_rows($rs_cat)>0){
 		echo '<div id="active">';
 while ($rows=mysqli_fetch_assoc($rs_cat)) {
 		
@@ -82,28 +83,28 @@ while ($rows=mysqli_fetch_assoc($rs_cat)) {
             <hr>
             <p class="lead">'.$rows['task_content'].'</p>
             <a class="btn btn-primary" href="edit-task.php?taskid='.$rows['task_id'].'">Edit</a>
-            <a class="btn btn-danger" href="controller.php?action=delete&taskid='.$rows['task_id'].'">Delete</a>
+
+            <input type="hidden" id="tid" value="'.$rows['task_id'].'"/>
+
+            <button class="btn btn-danger delbutton" type="button" id="del">Delete</button>
             ';
 
             
 		echo '</div>';
 	
 }
-if($_GET['view']=="all"){
-	echo '<div id="alltasks">';
-		while ($rows=mysqli_fetch_assoc($rs)) {
-			echo '<div class="well post-card">';
-
-			echo '<span class="badge bg-success pull-right">'.$rows['status'].'</span>
-            <h3 class="text-center">'.$rows['task_title'].'</h3>
-            <p class="lead">'.$rows['task_content'].'</p>
+}else{
+	echo '<div id="active">';
+	echo '<div class="well post-card">';
+					
+			echo '
+            <h3 class="text-center text-muted">You Have No Active Tasks</h3>
+            <hr>
             
-             ';
+            ';
 
 			echo '</div>';
-					
-	}
-		echo '</div>';
+			echo '</div>';
 }
 }
 
@@ -111,6 +112,8 @@ if($_GET['view']=='complete'){
 $complete = $_GET['view'];
 $view_comp = "SELECT * FROM task WHERE status='$complete'";
 $rs_comp = mysqli_query($connection,$view_comp);
+
+if(mysqli_num_rows($rs_comp)>0){
 	echo '<div id="complete">';
 		while ($rows=mysqli_fetch_assoc($rs_comp)) {
 			echo '<div class="well post-card">';
@@ -119,13 +122,29 @@ $rs_comp = mysqli_query($connection,$view_comp);
             <h3 class="text-center">'.$rows['task_title'].'</h3>
             <hr>
             <p class="lead">'.$rows['task_content'].'</p>
-            <a class="btn btn-danger" href="controller.php?action=delete&taskid='.$rows['task_id'].'">Delete</a>
+
+            <input type="hidden" id="tid" value="'.$rows['task_id'].'"/>
+
+            <button class="btn btn-danger delbutton" type="button" id="del">Delete</button>
             ';
 
 			echo '</div>';
 					
 	}
 		echo '</div>';
+}else{
+	echo '<div id="complete">';
+	echo '<div class="well post-card">';
+					
+			echo '
+            <h3 class="text-center text-muted">You Have Not Completed Any Tasks Yet</h3>
+            <hr>
+            
+            ';
+
+			echo '</div>';
+			echo '</div>';
+}
 }
 }//if get view
 		echo'</div>';
