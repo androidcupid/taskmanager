@@ -31,24 +31,24 @@ if ($rs) {
 								<li class="list-group-item">
 									<a href="?view=active" id="showactive">Active Tasks</a>';
 									$active = "SELECT COUNT(task_id) as active FROM task WHERE status='active'";
-						$rs_np = mysqli_query($connection, $active);
-						
-						while($rows=mysqli_fetch_array($rs_np)){
-						echo'
-					    <p class="badge bg-warning">'.$rows['active'].'</p>';
-						}
-						echo'
+									$rs_np = mysqli_query($connection, $active);
+									
+									while($rows=mysqli_fetch_array($rs_np)){
+									echo'
+								    <p class="badge bg-warning">'.$rows['active'].'</p>';
+									}
+									echo'
 								</li>
 								<li class="list-group-item">
-									<a href="?view=complete" id="showcomplete">Completed Tasks</a>';
-								$complete = "SELECT COUNT(task_id) as complete FROM task WHERE status='complete'";
-						$rs_np = mysqli_query($connection, $complete);
-						
-						while($rows=mysqli_fetch_array($rs_np)){
-						echo'
-					    <p class="badge bg-success">'.$rows['complete'].'</p>';
-						}
-						echo'	
+												<a href="?view=complete" id="showcomplete">Completed Tasks</a>';
+											$complete = "SELECT COUNT(task_id) as complete FROM task WHERE status='complete'";
+									$rs_np = mysqli_query($connection, $complete);
+									
+									while($rows=mysqli_fetch_array($rs_np)){
+									echo'
+								    <p class="badge bg-success">'.$rows['complete'].'</p>';
+									}
+									echo'	
 								</li>
 								<li class="list-group-item">
 									<a href="controller.php?action=logout" id="">Logout</a>
@@ -65,7 +65,7 @@ if ($rs) {
 		
 		
 
-
+//switch views, based on options in menu
 if(isset($_GET['view'])){
 if($_GET['view']=='active'){
 $active = $_GET['view'];
@@ -73,6 +73,8 @@ $show_task = "SELECT * FROM task WHERE status='$active'";
 $rs_cat = mysqli_query($connection,$show_task);
 
 if(mysqli_num_rows($rs_cat)>0){
+
+	//view active tasks
 		echo '<div id="active">';
 while ($rows=mysqli_fetch_assoc($rs_cat)) {
 		
@@ -86,6 +88,8 @@ while ($rows=mysqli_fetch_assoc($rs_cat)) {
 
             <input type="hidden" id="tid" value="'.$rows['task_id'].'"/>
 
+            
+
             <button class="btn btn-danger delbutton" type="button" id="del">Delete</button>
             ';
 
@@ -94,6 +98,7 @@ while ($rows=mysqli_fetch_assoc($rs_cat)) {
 	
 }
 }else{
+	//display this pane if active task pane is empty
 	echo '<div id="active">';
 	echo '<div class="well post-card">';
 					
@@ -108,6 +113,7 @@ while ($rows=mysqli_fetch_assoc($rs_cat)) {
 }
 }
 
+//view completed tasks
 if($_GET['view']=='complete'){
 $complete = $_GET['view'];
 $view_comp = "SELECT * FROM task WHERE status='$complete'";
@@ -133,6 +139,7 @@ if(mysqli_num_rows($rs_comp)>0){
 	}
 		echo '</div>';
 }else{
+	//display this pane if complete task pane is empty
 	echo '<div id="complete">';
 	echo '<div class="well post-card">';
 					
@@ -146,7 +153,7 @@ if(mysqli_num_rows($rs_comp)>0){
 			echo '</div>';
 }
 }
-}//if get view
+}
 		echo'</div>';
 		
 		echo '

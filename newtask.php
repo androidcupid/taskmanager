@@ -11,13 +11,13 @@ if(!isset($_SESSION['user'])){
 	<div class="new-task">
 		<h1 class="display-2 text-center">New Task</h1>
 
-		<form method="POST" action="controller.php" id="task_data">
+		<form method="POST" action="controller.php" class="task_data">
 							
 			<input type="text" class="form-control" name="title" id="title"placeholder="Title" required/>
 							
 			<textarea type="textbox" class="form-control" name="content" id="content" style="height:200px" placeholder="Description...." required> </textarea>							
 
-			<button type="submit" class="btn btn-success" name="newtask">POST</button>
+			<button type="submit" class="btn btn-success" id="newtask">POST</button>
 						
 		</form>
 	</div>

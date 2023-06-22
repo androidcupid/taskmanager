@@ -22,7 +22,7 @@ if ($rs_edit) {
 			<div class="new-task">
 				<h1 class="display-2 text-center">Edit Task</h1>
 
-				<form method="POST" id="editform" action="controller.php?action=edit&tid='.$rows['task_id'].'">
+				<form method="POST" class="editform" action="controller.php?action=edit&tid='.$rows['task_id'].'">
 					<label><strong>Title</strong></label>				
 					<input type="text" class="form-control" name="title" placeholder="Title" value="'.$rows['task_title'].'" disabled="true" required/>
 					<label><strong>Description</strong></label>				
@@ -34,7 +34,7 @@ if ($rs_edit) {
 						<option value="complete">Complete</option>
 					</select>
 
-					<input type="hidden" id="tid" value="'.$rows['task_id'].'"/>
+					<input type="hidden" class="tid" value="'.$rows['task_id'].'"/>
 
 					<button type="submit" class="btn btn-success">Update Task</button>
 								

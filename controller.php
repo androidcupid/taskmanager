@@ -14,10 +14,22 @@
 //include('includes/header.php'); 
 include('includes/connection.php');
 
-if(isset($_POST['login'])){
-    $username = $_POST['username'];
-    $password = MD5($_POST['password']);
+function clean($str) {
+        $connection=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
+        $str = @trim($str);  //removes trailing spaces between and after the string
+        if(get_magic_quotes_gpc()) {
+            $str = stripslashes($str); //removes slashes
+        }
+        return mysqli_real_escape_string($connection,$str); //removes and escapes single qoutes
+    }
 
+//index.php
+if(isset($_POST['login'])){
+    //sanitize login credentials
+    $username = clean($_POST['username']);
+    $password = clean(MD5($_POST['password']));
+
+    //check for valid username
     $us_check = "SELECT * FROM admin WHERE username ='$username'";
     $rs_check= mysqli_query($connection,$us_check);
 
@@ -38,13 +50,16 @@ if(isset($_POST['login'])){
     }
 }
 
-//if (isset($_POST['newtask'])) {
+
+//newtask.php
 if (isset($_GET['action'])) {
 if ($_GET['action']=='newtask') {
-    //session_start();
+    
     $title = $_POST['title'];
     $content = $_POST['content'];
     $user = $_SESSION['user'];
+
+    //insert form data into database
     $newtask = "INSERT INTO `task`(`task_title`, `task_content`, `status`, `date_created`, `createdby`) VALUES ('$title','$content','active',(select(current_timestamp())),'$user')";
     $rs_newtask = mysqli_query($connection,$newtask);
 
@@ -61,14 +76,15 @@ if ($_GET['action']=='newtask') {
 
 //edit-task.php
 if (isset($_GET['action'])) {
-if($_GET['action']=='edit'){
-if (isset($_GET['tid'])) {
-    //session_start();
+if($_GET['action']=='edit'&&isset($_GET['tid'])){
+
+    
     $status = $_POST['status'];
     $content = $_POST['content'];
     $user = $_SESSION['user'];
     $taskid = $_GET['tid'];
-    //echo $task_id;
+    
+    //update task table in the instance where status is active
     if ($status=='active') {
        
     $uptask = "UPDATE `task` SET `task_content`='$content',`status`='$status' WHERE task_id='$taskid'";
@@ -82,6 +98,7 @@ if (isset($_GET['tid'])) {
     }
 
 }else{
+    //if updating from 'active' to 'complete', update date_completed field in database
     $uptask = "UPDATE `task` SET `task_content`='$content',`status`='$status',`date_completed`=(select(current_timestamp())) WHERE task_id='$taskid'";
     $rs_uptask = mysqli_query($connection,$uptask);
     
@@ -93,7 +110,7 @@ if (isset($_GET['tid'])) {
     }
 }
 
-}
+
 }
 }
 
@@ -108,7 +125,7 @@ if($_GET['action']=='delete'){
     if ($dr) {
         echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
         <strong>Task Deleted! </strong><br/>
-        <a href="dashboard.php?">Refresh Page</a>
+        <a href="dashboard.php?view=active">Refresh Page</a>
         </div>';
     }else{
         echo '<div class="alert alert-success text-center"><button type="button" class="close" aria-label="Close" data-dismiss="alert">&times</button>
